@@ -1,0 +1,109 @@
+<html>
+<head>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+	
+</head>
+
+<body>
+  <p>This is my d3 practice file</p>
+	<svg width="960" height="500"></svg>
+
+	
+</body>
+
+<script type="text/javascript">
+  //d3 is an object, collection library code
+  d3.select("p").text("Hello world!");
+  d3.select("body").append("h5").text("Hi this is a heading 1 appended");
+
+  d3.select("body")
+      .append("h1")
+      .style("color", "red")
+      .text("SVG");
+
+   var canvas1 = d3.select("body")
+                  .append("svg")
+                  .attr("width","500")
+                  .attr("height", "500")
+    // when styling the svg, we use attr other than style
+    var circle1 = canvas1.append("circle")
+                        .attr("cx", 250)
+                        .attr("cy", 250)
+                        .attr("r", 50)
+                        .attr("fill", "red");
+
+    /*
+    var rec1 = canvas1.append("rect")
+                      .attr("width", 100)
+                      .attr("height", 200)
+                      .attr("fill", "black");
+    */
+    var line1 = canvas1.append("line")
+                        .attr("x1", 100)
+                        .attr("y1", 100)
+                        .attr("x2", 200)
+                        .attr("y2", 200)
+                        .attr("stroke", "green")
+                        .attr("stroke-width", 5);
+
+    var canvas2 = d3.select("body")
+                  .append("svg")
+                  .attr("width","500")
+                  .attr("height", "200");
+
+    var dataArray2 = [20, 40, 60];
+
+    var bars = canvas2.selectAll("rect")
+                      .data(dataArray2)
+                      .enter() //return containers for data that not bound to dom object
+                        .append("rect")
+                        .attr("height", function(d){
+                          return d;
+                        })
+                        .attr("width", 10)
+                        .attr("x", function(d, index){
+                          return index * 50;
+                        })
+                        .attr("y", function(d){
+                          return 200 - d;
+                        });
+
+        //https://www.youtube.com/watch?v=iMYkVLWc3y0&list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p&index=5
+</script>
+
+<script>
+
+  var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    angles = d3.range(0, 2 * Math.PI, Math.PI / 200);
+
+  var path = svg.append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+    .attr("fill", "none")
+    .attr("stroke-width", 10)
+    .attr("stroke-linejoin", "round")
+  .selectAll("path")
+  .data(["cyan", "magenta", "yellow"])
+  .enter().append("path")
+    .attr("stroke", function(d) { return d; })
+    .style("mix-blend-mode", "darken")
+    .datum(function(d, i) {
+      return d3.radialLine()
+          .curve(d3.curveLinearClosed)
+          .angle(function(a) { return a; })
+          .radius(function(a) {
+            var t = d3.now() / 1000;
+            return 200 + Math.cos(a * 8 - i * 2 * Math.PI / 3 + t) * Math.pow((1 + Math.cos(a - t)) / 2, 3) * 32;
+          });
+    });
+
+d3.timer(function() {
+  path.attr("d", function(d) {
+    return d(angles);
+  });
+});
+
+</script>
+
+</html>

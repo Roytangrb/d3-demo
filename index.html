@@ -1,0 +1,65 @@
+<html>
+
+<head>
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta charset="utf-8">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<link rel="stylesheet" href="SimpleBar.css">
+	<link rel="stylesheet" type="text/css" href="SimpleBar2.css">
+</head>
+
+<body>
+	<script type="text/javascript">
+		var body = d3.select("body");
+		var hello = body.append("div");
+		hello.html("Hello world")
+			.style("color", "red")
+			.style("font-size", 20)
+			.style("font-family", "Arial")
+			.style("text-align", "center")
+			.style("background-color", 'lightgreen');
+
+		//draw a line break
+		d3.select("body").append("hr");
+	</script>
+
+	<div class="chart1">
+		<h2>Creating a simple chart in HTML (SimpleBar)</h2>
+		<p><a href="https://bost.ocks.org/mike/bar/1/">tutorial</a></p>
+		<div id="chart1"></div>
+		<script src="SimpleBar.js"></script>
+	</div>
+	<hr>
+
+	
+	<h2 >Creating a simple bar chart in SVG (SimpleBar2)</h2>
+	<p>drawing svg with d3.js must declare the container as svg tag</p>
+	<p><a href="https://bost.ocks.org/mike/bar/3/">tutorial</a></p>
+	<svg class="chart2"></svg>
+	<script src="SimpleBar2.js"></script>
+	<hr>
+
+	<div class="chart3div">
+		<h2>Enter selection: binding data to circles</h2>
+		<p><a href="https://bost.ocks.org/mike/circles/">tutorial</a></p>
+		<svg class="chart3"></svg>
+		<script type="text/javascript" src="Circle.js"></script>
+	</div>
+	<hr>
+
+	<div class="textUpdateDiv">
+		<svg><text style="font:bold 38px 华文细黑;" x=32 y = 100>斷章 - 卞之琳</text></svg>
+		<svg class="textUpdate" width="960" height="500"></svg>
+		<script type="text/javascript" src="textUpdate.js"></script>
+		<style type="text/css">
+			.update{fill: #333;}
+			.enter{fill:green;}
+			.textUpdate text{font:bold 45px "华文细黑";}
+		</style>
+	</div>
+	<hr>
+	
+	
+</body>
+
+</html>

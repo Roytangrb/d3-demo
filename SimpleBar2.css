@@ -1,0 +1,18 @@
+.chart2 g{
+	fill:lightblue;
+}
+
+.chart2 text{
+	fill: black;
+	font-size: 12px;
+}
+
+.axis2 text{
+	font:10px sans-serif;
+}
+
+.axis2 path, .axis line{
+	fill:none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
