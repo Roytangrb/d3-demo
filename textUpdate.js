@@ -5,17 +5,35 @@ var width4 = +textChart.attr("width");
 var height4 = +textChart.attr("height");
 var g4 = textChart.append("g").attr("transform", "translate(32, " + height / 2 + ")");
 
+//set timing of transition
+var t4 = d3.transition().duration(750);
+
+
 function textUpdate(data){
 	
   // DATA JOIN
   // Join new data with old elements, if any.
   var text4 = g4.selectAll("text")
-    .data(data);
+    .data(data, function(d){return d;});
+
+  // exit old elements not presetn in new data
+  text4.exit()
+    .attr("class", "exit")
+    .attr("fill", "brown")
+    .transition(t4)
+    .attr("y", 60)
+    .style("fill-opacity", 1e-6)
+    .remove();
 
   // UPDATE
   // Update old elements as needed.
-  text4.attr("class", "update");
-
+  text4.attr("class", "update")
+        .attr("y", 0)
+        .style("fill-opacity", 1)
+        .transition(t4)
+        .attr("x", function(d, i){
+          return i * 45;
+        });
   // ENTER
   // Create new elements as needed.
   //
@@ -24,14 +42,21 @@ function textUpdate(data){
   // apply operations to both.
   text4.enter().append("text")
       .attr("class", "enter")
-      .attr("x", function(d, i) { return i * 45; })
       .attr("dy", ".35em")
-    .merge(text4)
-      .text(function(d) { return d; });
-
+      .attr("y", -60)
+      .attr("x", function(d, i){
+        return i * 45;
+      })
+      .style("fill-opacity", 1e-6)
+      .text(function(d) { return d; })
+      .transition(t4)
+    //.merge(text4)
+      .attr("y", 0)
+      .style("fill-opacity", 1);
+        
   // EXIT
   // Remove old elements as needed.
-  text4.exit().remove();
+  //text4.exit().remove();
 }
 
 textUpdate(string4);
