@@ -6,7 +6,7 @@ var height4 = +textChart.attr("height");
 var g4 = textChart.append("g").attr("transform", "translate(32, " + height / 2 + ")");
 
 //set timing of transition
-var t4 = d3.transition().duration(750);
+var t4 = d3.transition().duration(1500);
 
 
 function textUpdate(data){
