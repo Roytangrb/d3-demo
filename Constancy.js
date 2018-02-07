@@ -9,25 +9,54 @@ var chart5 = d3.select(".chart5")
 				.attr("width", 960)
 				.attr("height", 500)
 				.append("g").attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+var data5;
+var bars;
+d3.json("births.json", function(error, data){
+	if (error) {
+		console.log(error);
+		throw error;
+	}
+	
+	data5 = data;
 
-
-d3.json("birth.json", function(error, data){
-
-	chart5.selectAll("g")
-	.data(data)
+	bars = chart5.selectAll("g")
+	.data(data5)
 	.enter()
 	.append("g")
-	.attr("transform", "translate(" + function(d, i){
-		return 33 * i + 20;
-	} + ", " + height5 + ")")
-	.attr("x", 0)
-	.attr("y", function(d, i){
-		return height5 - d["2006"] * 10;
+	.attr("transform", function(d, i){
+		return "translate(0, " + 33 * i + ")";
 	})
-	.attr("height", function(d){
-		return d["2006"] * 10;
+	.append("rect")
+	.transition()
+	.attr("width", function(d){
+		return d[year5[count5 % 3]] * 10;
 	})
-	.attr("width", 32);
+	.attr("height", 32)
+	.attr("fill", "steelblue");
 });
+
+var year5 = [2006, 2011, 2016];
+var count5 = 0;
+/*
+d3.interval(function (){
+	//2006 2011 2016
+	//var year_index = Math.floor(Math.random() * 3);
+	// count5 ++;
+	// chart5.selectAll("g")
+	// .update()
+	// .append("g")
+	// .attr("transform", function(d, i){
+	// 	return "translate(0, " + 33 * i + ")";
+	// })
+	// .append("rect")
+	bars.selectAll("rect").transition()
+	.attr("width", function(){
+		return data5[year5[count5 % 3]] * 10;
+	})
+	.attr("height", 32)
+	.attr("fill", "steelblue");
+}, 2000);
+
+*/
 
 
