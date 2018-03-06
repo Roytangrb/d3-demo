@@ -21,7 +21,26 @@ function useImage(){
 					.attr("fill", "url(#pattern1)");
 
 	var data = [1, 2, 3, 4, 5, 6];
-	console.log(data);
+
+	//create definitions in d3 
+	var defs = canvas.append("defs")
+
+	// <pattern id="pattern1" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+	// 				<image height="1" width="1" preserveAspectRatio="none" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="1.png">
+	// 				</image>
+	// 			</pattern>
+	var ImagePattern = defs.append("pattern")
+						.attr("id", "pattern1")
+						.attr("height", "100%")
+						.attr("width", "100%")
+						.attr("patternContentUnits", "objectBoundingBox")
+						.append("image")
+						.attr("height", 1)
+						.attr("width", 1)
+						.attr("preserveAspectRatio", "none")
+						.attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+						.attr("xlink:href", "1.png")
+
 	var bubbles = g.selectAll(".bubbles")
 					.data(data)
 					.enter()
@@ -31,6 +50,19 @@ function useImage(){
 					})
 					.attr("cy", 160)
 					.attr("r", 20)
-					.attr("fill", "red");
-	console.log(bubbles);
+					//when using image mapping fill, the id name should not contain space
+					// return d.name.toLowerCase().replace(/ /g, "-");
+					//replace() only replace once, need to use the regular expresssion
+					//and later refer to this id with the same string
+					.attr("fill", "url(#pattern1)");
+
+
+
+
+
+
+
+
+
+
 }
