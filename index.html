@@ -89,7 +89,30 @@
 		<h2>D3 transition: Bar to Pie</h2>
 		<p><a href="http://blog.infographics.tw/2015/03/d3js-bar-pie-morph-chart/">tutorial</a></p>
 		<svg  class="bar2pie1" width="800px" height="400px" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid"></svg>
-		<script type="text/javascript" src="bar2pie.js"></script>
+		<<!-- script type="text/javascript" src="bar2pie.js"></script> -->
+	</div>
+
+	<div>
+		<h2>Use defs and pattern in D3</h2>
+		<p><a href="https://www.youtube.com/watch?v=yxr1IZ3MrAw">tutorial</a></p>
+		<svg class="imageChart" width="800px" height="500px">
+			<defs>
+				<linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+					<stop offset="0%" stop-color="#F433FF" stop-opacity="1"></stop>
+					<stop offset="100%" stop-color="#3DFF33" stop-opacity="1"></stop>
+				</linearGradient>
+				<radialGradient id="radialGradient1">
+				</radialGradient>
+				<pattern id="pattern1" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+					<image height="1" width="1" preserveAspectRatio="none" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="1.png">
+					</image>
+				</pattern>
+			</defs>
+		</svg>
+		<script type="text/javascript" src="image.js"></script>
+		<script>
+			useImage();
+		</script>
 	</div>
 	
 </body>

@@ -6,7 +6,7 @@ var height4 = +textChart.attr("height");
 var g4 = textChart.append("g").attr("transform", "translate(32, " + height / 2 + ")");
 
 //set timing of transition
-//var t4 = d3.transition().duration(1500);
+var t4 = d3.transition().duration(1500);
 
 
 function textUpdate(data){
@@ -49,7 +49,7 @@ function textUpdate(data){
       })
       .style("fill-opacity", 1e-6)
       .text(function(d) { return d; })
-      ..transition().duration(1500)    //.merge(text4)
+      .transition().duration(1500)    //.merge(text4)
       .attr("y", 0)
       .style("fill-opacity", 1);
         
