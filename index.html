@@ -115,6 +115,35 @@
 		</script>
 	</div>
 	
+
+	<div>
+		<h2 >Creating a world map</h2>
+		<h3>Every time dealing with Maps and TopoJson in d3, remember to pull in d3.js topojson cdn</h3>
+		<p><a href="https://www.youtube.com/watch?v=aNbgrqRuoiE">tutorial</a></p>
+		<style>
+			.worldMap {
+				background-color: white;
+			}
+			.country {
+				fill: #cccccc;
+				stroke: #333333;
+				stroke-width: 0.5;
+			}
+			.selected {
+				fill: yellow;
+			}
+			.hover{
+				fill: orange;
+			}
+		</style>
+		<svg class="worldMap"></svg>
+		<!-- include topotjson cdn-->
+		<script src="//d3js.org/topojson.v1.min.js"></script>
+		<script type="text/javascript" src="worldMap.js"></script>
+		<script type="text/javascript">
+			world();
+		</script>
+	</div>
 </body>
 
 </html>
