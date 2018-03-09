@@ -13,7 +13,7 @@ function world (){
 	d3.queue()
 		.defer(d3.json, "worldMap.topojson")
 		//pull in another file
-		//.defer(d3.csv, "capitals.csv")
+		.defer(d3.csv, "country-capitals.csv")
 		.await(ready)
 
 	/*
@@ -30,7 +30,7 @@ function world (){
 	*/
 	var path = d3.geoPath().projection(projection);
 
-	function ready(error, data){
+	function ready(error, data, capitals){
 		if (error) throw error;
 
 		var countries = topojson.feature(data, data.objects.countries1).features;
@@ -51,6 +51,42 @@ function world (){
 			}).on("mouseout", function(d){
 				d3.select(this).classed("hover", false);
 			});
+
+
+		//use the csv to give labels to the capitals
+		console.log(capitals);
+
+		var capName = g.append("text")
+						.attr("x", width - 250)
+						.attr("y", height)
+						.attr("font-size", "30px")
+						.text("Capital")
+
+		g.selectAll(".country_capital")
+			.data(capitals)
+			.enter()
+			.append("circle")
+			.attr("class", "country_capital")
+			.attr("cx", function(d){
+				console.log(d);
+				var coords = projection([d["CapitalLongitude"], d["CapitalLatitude"]])
+				return coords[0];
+			})
+			.attr("cy", function(d){
+				var coords = projection([d["CapitalLongitude"], d["CapitalLatitude"]])
+				return coords[1];
+			})
+			.attr("r", 4)
+			.attr("fill", "rgba(0, 0, 200, 0.7)")
+			.on("mouseover", function(d){
+				d3.select(this).attr("r", 8);
+				capName.text("Captial:" + d['CapitalName']);
+			})
+			.on("mouseout", function(){
+				d3.select(this).attr("r", 4);
+				capName.text("Captial:");
+			});
+
 
 	}
 	
